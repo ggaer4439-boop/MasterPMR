@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мастер ПМР — каталог мастеров Приднестровья</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--ink:#0f172a;--mute:#64748b;--line:#e5e7eb;--brand:#2547f5;--navy:#0f1b3d;--call:#16a34a;--tg:#229ed9;--err:#dc2626;--r:18px;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;min-height:100vh;padding-bottom:100px;overflow-x:clip;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;height:60px}
+header nav{display:none}
+.logo{font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.4px}
+.logo b{background:var(--brand);color:#fff;padding:1px 8px;border-radius:8px;margin-left:4px}
+h1{font-size:clamp(32px,6vw,56px);line-height:1.05;letter-spacing:-1.8px;margin:28px 0 12px;font-weight:800}
+h2{font-size:24px;letter-spacing:-.5px;margin:40px 0 14px}
+input,select,textarea{font:inherit;color:inherit;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;width:100%;min-height:50px}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--brand);box-shadow:0 0 0 4px rgba(37,71,245,.12)}
+textarea{min-height:110px;resize:vertical}
+.search{display:flex;gap:8px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:8px;box-shadow:0 10px 30px -12px rgba(15,23,42,.18)}
+.search:focus-within{border-color:var(--brand)}
+.search input{flex:1 1 auto;width:auto;border:0;background:transparent;box-shadow:none;min-height:48px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 22px;border-radius:14px;border:0;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;background:var(--ink);color:#fff;transition:transform .15s,background .15s}
+.btn:hover{background:#1e293b;transform:translateY(-1px)}
+.btn.sun{background:var(--call)}.btn.sun:hover{background:#15803d}
+.btn.tg{background:var(--tg)}.btn.tg:hover{background:#1b8bc0}
+.btn.ghost{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+.rb{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:24px;line-height:1;cursor:pointer;box-shadow:0 4px 12px -4px rgba(15,23,42,.2)}
+.ic{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* баннер */
+.banner{position:relative;margin:22px 0 0;border-radius:28px;overflow:hidden;min-height:340px;perspective:1200px;background:var(--brand);color:#fff}
+.bars{position:absolute;top:16px;left:20px;right:20px;display:flex;gap:6px;z-index:3}
+.bars i{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.22);overflow:hidden;cursor:pointer;position:relative}
+.bars i::after{content:"";position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left}
+.bars i.done::after{transform:scaleX(1)}
+.bars i.on::after{animation:fill 7s linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.scene{position:absolute;inset:0;padding:52px 32px 32px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:center;visibility:hidden;opacity:0;pointer-events:none;transform:translate3d(32px,0,0) rotateY(-9deg);transition:opacity .9s ease,transform 1s cubic-bezier(.22,.8,.3,1),visibility 0s 1s}
+.scene.out{transform:translate3d(-32px,0,0) rotateY(9deg)}
+.scene.on{visibility:visible;opacity:1;pointer-events:auto;transform:none;transition-delay:0s}
+.scene h2{font-size:clamp(26px,5vw,44px);line-height:1.08;margin:0 0 12px;letter-spacing:-1.2px}
+.scene p{margin:0 0 22px;color:rgba(255,255,255,.88);font-size:18px;max-width:40ch}
+.scene .btn{background:#fff;color:var(--ink)}
+.stage{height:220px;perspective:700px;display:grid;place-items:center}
+.cube{width:110px;height:110px;position:relative;transform-style:preserve-3d;animation:spin 20s linear infinite}
+.cube b{position:absolute;inset:0;display:grid;place-items:center;border-radius:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35)}
+.cube b svg{width:46px;height:46px;stroke:#fff;stroke-width:1.6}
+.cube b:nth-child(1){transform:translateZ(55px)}.cube b:nth-child(2){transform:rotateY(90deg) translateZ(55px)}.cube b:nth-child(3){transform:rotateY(180deg) translateZ(55px)}.cube b:nth-child(4){transform:rotateY(-90deg) translateZ(55px)}.cube b:nth-child(5){transform:rotateX(90deg) translateZ(55px)}.cube b:nth-child(6){transform:rotateX(-90deg) translateZ(55px)}
+@keyframes spin{from{transform:rotateX(-18deg) rotateY(0)}to{transform:rotateX(-18deg) rotateY(360deg)}}
+.bnav{position:absolute;right:18px;bottom:18px;display:flex;gap:8px;z-index:3}
+.bnav .rb{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.3);box-shadow:none}
+.banner::before,.banner::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none}
+.banner::before{width:440px;height:440px;right:-130px;top:-170px}
+.banner::after{width:260px;height:260px;left:-90px;bottom:-130px}
+.scene{z-index:1}
+.vis{position:relative;height:230px}
+.vc{position:absolute;width:236px;padding:14px;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 18px 40px -18px rgba(5,15,60,.6)}
+.vc.a{left:0;top:6px;transform:rotate(-3deg);animation:fl 6s ease-in-out infinite}
+.vc.b{right:0;bottom:4px;transform:rotate(3deg);animation:fl 6s ease-in-out -3s infinite}
+@keyframes fl{50%{translate:0 -8px}}
+.vc b{display:block;line-height:1.25}
+.vc .top{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.vc .av{width:42px;height:42px;font-size:15px}
+.vc.ok{display:flex;gap:10px;align-items:center}.vc.ok .ic{width:30px;height:30px;color:var(--call)}
+.pill{display:inline-block;padding:6px 12px;border-radius:99px;font-size:13px;font-weight:700;color:#fff}.pill.g{background:var(--call)}.pill.t{background:var(--tg)}
+.ln{height:8px;border-radius:4px;background:#e5e7eb;margin:10px 0}.ln.s{width:60%}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.st{display:grid;gap:6px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+.st .n{width:34px;height:34px;border-radius:50%;background:#eef2ff;color:var(--brand);display:grid;place-items:center;font-weight:800}
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:center;margin-top:40px;padding:26px;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+.about p{margin:0;color:var(--mute)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.facts b{display:block;font-size:30px;letter-spacing:-1px}.facts span{font-size:13px;color:var(--mute)}
+#pv{pointer-events:none}
+@media(max-width:640px){.vis{display:none}.about{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.vc{animation:none}}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.role{display:grid;gap:6px;justify-items:start;text-align:left;padding:16px;border-radius:var(--r);border:2px solid var(--line);background:#fff;font:inherit;color:inherit;cursor:pointer}
+.role .ic{width:28px;height:28px;color:var(--brand)}
+.role.on{border-color:var(--brand);background:#eef2ff}
+.ah{display:flex;gap:14px;align-items:center;margin:28px 0 12px}
+.good{color:#15803d;font-weight:600}
+.banner,.ringwrap{touch-action:pan-y}
+.gate .tabs{display:none}
+.seg{display:flex;gap:4px;padding:4px;background:#e8eaef;border-radius:14px}
+.seg button{flex:1;min-height:42px;border:0;border-radius:11px;background:transparent;font:inherit;font-weight:700;color:var(--mute);cursor:pointer}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(15,23,42,.15)}
+.rt{font-weight:800;color:#b45309}
+.stars{display:flex;gap:2px}.stars button{border:0;background:none;font-size:30px;line-height:1;padding:2px;color:#cbd5e1;cursor:pointer}.stars button.on{color:#f59e0b}
+.chat{display:flex;flex-direction:column;gap:8px;height:55vh;min-height:280px;overflow-y:auto;padding:14px;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+.bb{max-width:78%;padding:9px 13px;border-radius:16px;background:#eef0f4;align-self:flex-start;overflow-wrap:anywhere}
+.bb.me{align-self:flex-end;background:var(--brand);color:#fff}
+.cf{display:flex;gap:8px;margin-top:10px}.cf input{flex:1}.cf .btn{padding:0 18px}
+.cw{position:fixed;inset:0;z-index:40;display:none;align-items:flex-end;justify-content:center;padding:12px;background:rgba(15,23,42,.45)}
+.cw.open{display:flex}
+.cwi{width:min(520px,100%);padding:14px;background:var(--bg);border-radius:22px;box-shadow:0 20px 60px -20px rgba(15,23,42,.5)}
+.cwi .chat{height:48vh}
+.cwh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+/* услуги */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:10px;padding:8px 18px 8px 8px;border-radius:99px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:600;transition:border-color .2s,transform .2s}
+.chip:hover{border-color:var(--c1);transform:translateY(-2px)}
+.dot,.sv .ib{display:grid;place-items:center;border-radius:50%;background:var(--c1);flex:none}
+.dot{width:34px;height:34px}.dot svg{width:18px;height:18px;stroke:#fff}
+.ringwrap{position:relative;height:220px;perspective:900px;overflow:hidden}
+.ring{position:absolute;left:50%;top:50%;width:130px;height:150px;margin:-75px 0 0 -65px;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.22,.8,.3,1)}
+.cat{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border-radius:22px;text-decoration:none;font-weight:700;font-size:15px;color:#fff;background:var(--c1);box-shadow:0 16px 30px -16px var(--c1);transform:rotateY(calc(var(--i)*51.4286deg)) translateZ(200px);backface-visibility:hidden}
+.cat .ib{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22)}
+.cat .ib svg{width:30px;height:30px;stroke:#fff}
+.ringwrap .rb{position:absolute;top:50%;margin-top:-22px;z-index:2}
+.rp{left:4px}.rn{right:4px}
+.svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:18px}
+.sv{display:flex;gap:14px;align-items:center;padding:14px;border-radius:var(--r);text-decoration:none;background:#fff;border:1px solid var(--line);transition:border-color .2s,transform .2s}
+.sv:hover{border-color:var(--c1);transform:translateY(-2px)}
+.sv .ib{width:54px;height:54px}.sv .ib svg{width:26px;height:26px;stroke:#fff}
+.sv b{display:block;font-size:17px}
+/* карточки */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.mc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 2px rgba(15,23,42,.04);transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s ease-out,border-color .2s,box-shadow .2s}
+.mc.tilt{border-color:#c7d2fe;box-shadow:0 20px 40px -22px rgba(37,71,245,.45)}
+.mc .top{display:flex;gap:12px;align-items:center}
+.av{width:56px;height:56px;border-radius:50%;background:#e0e7ff;color:#3730a3;display:grid;place-items:center;font-weight:800;font-size:20px;flex:none;object-fit:cover}
+.av.big{width:84px;height:84px;font-size:30px}
+.mc h3{margin:0;font-size:18px;line-height:1.2}
+.meta{color:var(--mute);font-size:14px}
+.price{font-weight:700}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+.actions.col{grid-template-columns:1fr}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin:16px 0}
+form.f{display:grid;gap:14px;max-width:560px}
+label{font-weight:600;font-size:15px;display:grid;gap:6px}
+.hint{font-weight:400;color:var(--mute);font-size:13px}
+.msg{padding:16px;border-radius:14px;background:#ecfdf5;border:1px solid #86efac;color:#14532d;font-weight:600}
+.err{color:var(--err);font-weight:600}
+.empty{padding:28px;text-align:center;color:var(--mute);border:1.5px dashed #cbd5e1;border-radius:var(--r);background:#fff}
+.crumb{display:inline-block;margin:18px 0 6px;color:var(--mute);text-decoration:none;font-weight:600}
+.cta{margin:40px 0;padding:26px;border-radius:var(--r);background:var(--navy);color:#fff;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta h2{margin:0 0 4px}.cta .btn{background:#fff;color:var(--ink)}
+footer{padding:24px 0 20px;color:var(--mute);font-size:14px}
+.lnk{background:none;border:0;padding:0;font:inherit;color:var(--brand);cursor:pointer;text-decoration:underline}
+/* нижняя панель: и на телефоне, и на ПК */
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:50%;bottom:14px;transform:translateX(-50%);width:min(560px,calc(100% - 20px));z-index:25;padding:6px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 40px -12px rgba(15,23,42,.28)}
+.tabs a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11.5px;font-weight:600;color:var(--mute);text-decoration:none;padding:8px 0;border-radius:16px;transition:background .2s,color .2s}
+.tabs a .ic{width:23px;height:23px}
+.tabs a:hover{background:#f1f5f9}
+.tabs a.on{color:var(--brand);background:#eef2ff}
+/* 3D-переход между страницами */
+#ghost{position:fixed;top:0;z-index:15;pointer-events:none;overflow:hidden;transform-origin:50% 40vh;animation:gout .8s cubic-bezier(.5,0,.2,1) forwards}
+#app.in{transform-origin:50% 40vh;animation:gin .9s cubic-bezier(.22,.8,.3,1) .12s backwards}
+@keyframes gout{0%{opacity:1;transform:perspective(1600px) translate3d(0,0,0) rotateY(0)}55%{opacity:0}100%{opacity:0;transform:perspective(1600px) translate3d(calc(var(--d,1)*-48%),0,-380px) rotateY(calc(var(--d,1)*58deg))}}
+@keyframes gin{0%{opacity:0;transform:perspective(1600px) translate3d(calc(var(--d,1)*48%),0,-380px) rotateY(calc(var(--d,1)*-58deg))}45%{opacity:0}100%{opacity:1;transform:perspective(1600px) translate3d(0,0,0) rotateY(0)}}
+@media(max-width:640px){
+ .banner{min-height:410px}
+ .scene{grid-template-columns:1fr;align-content:center;padding:46px 22px 76px}
+ .stage{height:130px}.cube{transform:scale(.72)}
+ .search .btn{padding:0 16px}
+}
+@media(prefers-reduced-motion:reduce){.cube{animation:none}.bars i.on::after{animation:none;transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#/">Мастер<b>ПМР</b></a>
+  <nav><a data-p="services" href="#/services">Услуги</a><a data-p="list" href="#/list">Мастера</a><a data-p="request" href="#/request">Заявка</a><a data-p="add" href="#/add">Я мастер</a></nav>
+</div></header>
+<main class="wrap" id="app"></main>
+<nav class="tabs" id="tabs" aria-label="Разделы"></nav>
+<footer class="wrap">Мастер ПМР — каталог мастеров Приднестровья. Контакты в демо-карточках вымышлены. <button class="lnk" id="reset">Сбросить тестовые данные</button></footer>
+
+<script>
+/* ===== НАСТРОЙКИ ===== */
+const CONFIG = {
+  SUPABASE_URL: "",   // например https://abcd1234.supabase.co  (пусто = режим прототипа)
+  SUPABASE_KEY: "",   // публичный anon-ключ из Supabase → Project Settings → API
+  ADMIN_TG: ""        // ваш Telegram без @ — сюда можно присылать заявки (необязательно)
+};
+const CATS = [
+  ["santeh","Сантехник","#2563eb","#2563eb","Трубы, смесители, установка техники"],
+  ["electric","Электрик","#ca8a04","#ca8a04","Проводка, розетки, освещение"],
+  ["repair","Ремонт","#dc2626","#dc2626","Отделка и ремонт квартир"],
+  ["beauty","Красота","#db2777","#db2777","Маникюр, причёски, косметология"],
+  ["tutor","Репетиторы","#16a34a","#16a34a","Школьные предметы и языки"],
+  ["moving","Перевозки","#7c3aed","#7c3aed","Грузчики и грузоперевозки"],
+  ["cleaning","Уборка","#0891b2","#0891b2","Квартиры, офисы, окна"]
+];
+const ICONS = {
+  santeh:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  electric:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+  repair:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v6M15 10v5M9 15v5"/>',
+  beauty:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/>',
+  tutor:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v6"/>',
+  moving:'<path d="M2 5h11v11H2z"/><path d="M13 8h4l4 4v4h-8"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+  cleaning:'<circle cx="9" cy="14.5" r="5.5"/><circle cx="17.5" cy="7.5" r="3"/><circle cx="18.5" cy="17" r="2"/><path d="M6.5 13.5a3 3 0 0 1 2.2-2.2"/>',
+  note:'<path d="M5 3h10l4 4v14H5z"/><path d="M14 3v5h5M8 13h8M8 17h5"/>',
+  phone:'<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
+  check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  home:'<path d="M3 11 12 3l9 8M5 10v11h14V10M10 21v-6h4v6"/>',
+  send:'<path d="M21 3 3 10.5l6.5 2.5L12 20l2.5-5.5z"/><path d="M9.5 13 21 3"/>'
+};
+Object.assign(ICONS,{
+  grid:'<rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14.5a5 5 0 0 1 4.5 5"/>',
+  adduser:'<circle cx="10" cy="8" r="4"/><path d="M3 21a7 7 0 0 1 12-4.9"/><path d="M19 14v6M16 17h6"/>'
+});
+const ic = n => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+const CITIES = ["Тирасполь","Бендеры","Рыбница","Дубоссары","Григориополь","Слободзея","Каменка","Днестровск"];
+const DEMO = [
+  {id:"d1",name:"Сергей К.",category:"santeh",city:"Тирасполь",description:"Замена смесителей, труб, установка стиральных и посудомоечных машин. Выезд в день обращения.",price:"от 150 руб. за выезд",phone:"+37353300001",telegram:"demo_master1",photo:""},
+  {id:"d2",name:"Андрей М.",category:"electric",city:"Бендеры",description:"Проводка, розетки, щитки, люстры. Аккуратно и с гарантией на работу.",price:"от 100 руб. за точку",phone:"+37353300002",telegram:"demo_master2",photo:""},
+  {id:"d3",name:"Бригада «Уют»",category:"repair",city:"Рыбница",description:"Ремонт квартир под ключ: стены, полы, плитка, потолки. Смета бесплатно.",price:"от 120 руб. за м²",phone:"+37353300003",telegram:"demo_master3",photo:""},
+  {id:"d4",name:"Алина В.",category:"beauty",city:"Тирасполь",description:"Маникюр, педикюр, покрытие гель-лаком. Приём дома или выезд.",price:"маникюр от 150 руб.",phone:"+37353300004",telegram:"demo_master4",photo:""},
+  {id:"d5",name:"Ольга Петровна",category:"tutor",city:"Дубоссары",description:"Математика и русский язык, 5–11 классы, подготовка к экзаменам.",price:"80 руб. за час",phone:"+37353300005",telegram:"demo_master5",photo:""},
+  {id:"d6",name:"Виктор Т.",category:"moving",city:"Григориополь",description:"Газель, грузчики, переезды по городу и области.",price:"от 200 руб. за час",phone:"+37353300006",telegram:"demo_master6",photo:""},
+  {id:"d7",name:"Клининг «Чисто»",category:"cleaning",city:"Слободзея",description:"Уборка квартир и офисов, после ремонта, мытьё окон.",price:"от 300 руб. за уборку",phone:"+37353300007",telegram:"demo_master7",photo:""}
+];
+
+/* ===== ДАННЫЕ ===== */
+const useDB = !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_KEY);
+const sb = (path, opt={}) => fetch(CONFIG.SUPABASE_URL + "/rest/v1/" + path, {
+  ...opt, headers: {apikey: CONFIG.SUPABASE_KEY, Authorization: "Bearer " + CONFIG.SUPABASE_KEY,
+  "Content-Type": "application/json", Prefer: "return=minimal", ...(opt.headers||{})}
+});
+const mem = {};
+const ls = {
+  get(k, d){ try { const v = JSON.parse(localStorage.getItem(k)); if (v) return v; } catch(e){} return mem[k] || d; },
+  set(k, v){ mem[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+let masters = [];
+async function loadMasters(){
+  if (useDB) {
+    try {
+      const r = await sb("masters?approved=eq.true&select=*&order=created_at.desc");
+      if (!r.ok) throw new Error(r.status);
+      masters = await r.json(); return;
+    } catch(e){ console.error("Supabase:", e); }
+  }
+  masters = [...ls.get("pmr_masters", []), ...DEMO];
+}
+async function saveMaster(m){
+  if (useDB) {
+    const r = await sb("masters", {method:"POST", body: JSON.stringify({...m, approved:false})});
+    if (!r.ok) throw new Error("save");
+    return;
+  }
+  const list = ls.get("pmr_masters", []);
+  const id = "u" + Date.now(); list.unshift({...m, id}); ls.set("pmr_masters", list); return id;
+}
+async function saveRequest(q){
+  if (useDB) {
+    const r = await sb("requests", {method:"POST", body: JSON.stringify(q)});
+    if (!r.ok) throw new Error("save");
+    return;
+  }
+  const list = ls.get("pmr_requests", []); list.unshift(q); ls.set("pmr_requests", list);
+}
+
+/* ===== ПОМОЩНИКИ ===== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const catName = id => (CATS.find(c => c[0] === id) || [,"Другое"])[1];
+const tgUser = t => String(t || "").replace(/^(https?:\/\/)?(t\.me\/)?@?/i, "").replace(/[^\w]/g, "");
+const phoneOk = p => /^\+?[\d\s()\-]{7,20}$/.test(p);
+const tel = p => "tel:" + String(p).replace(/[^\d+]/g, "");
+const initials = n => n.replace(/[^\p{L}\s]/gu, "").trim().split(/\s+/).slice(0,2).map(w => w[0]).join("").toUpperCase() || "М";
+const avatar = (m, big) => m.photo && /^https?:\/\//.test(m.photo)
+  ? `<img class="av ${big?"big":""}" src="${esc(m.photo)}" alt="${esc(m.name)}">`
+  : `<div class="av ${big?"big":""}" aria-hidden="true">${esc(initials(m.name))}</div>`;
+const buttons = (m, col) => `<div class="actions ${col?"col":""}">
+  <a class="btn sun" href="${esc(tel(m.phone))}">${ic("phone")} Позвонить</a>
+  ${tgUser(m.telegram) ? `<a class="btn tg" href="https://t.me/${esc(tgUser(m.telegram))}" target="_blank" rel="noopener">${ic("send")} Написать в Telegram</a>` : ""}
+</div>`;
+const card = m => `<article class="mc" data-href="/master/${esc(m.id)}" style="cursor:pointer">
+  <div class="top">${avatar(m)}<div><h3><a href="#/master/${esc(m.id)}" style="text-decoration:none">${esc(m.name)}</a></h3>
+  <div class="meta">${esc(catName(m.category))} · ${esc(m.city || "Приднестровье")}</div></div></div>
+  <div>${esc((m.description || "").slice(0,110))}${(m.description||"").length>110?"…":""}</div>
+  <div class="price">${esc(m.price)}</div>
+  <div>${rating(m)}</div>
+  <a href="#/master/${esc(m.id)}" style="font-weight:700;color:var(--brand);text-decoration:none">Подробнее, отзывы и чат</a>
+  ${buttons(m)}
+</article>`;
+const options = (arr, sel) => arr.map(a => { const [v,t] = Array.isArray(a) ? a : [a,a]; return `<option value="${esc(v)}" ${v===sel?"selected":""}>${esc(t)}</option>`; }).join("");
+
+/* ===== СТРАНИЦЫ ===== */
+function home(){
+  const fresh = masters.slice(0,3);
+  const mc2 = (i,n,m,pill,cls,st) => `<div class="vc ${st}"><div class="top"><div class="av">${i}</div><div><b>${n}</b><div class="meta">${m}</div></div></div><span class="pill ${cls}">${pill}</span></div>`;
+  const VIS = [
+    mc2("СК","Сергей К.","Сантехник · Тирасполь","Позвонить","g","a") + mc2("АВ","Алина В.","Красота · Тирасполь","Telegram","t","b"),
+    `<div class="vc a"><b>Заявка</b><div class="ln"></div><div class="ln s"></div><span class="pill g">Отправить</span></div><div class="vc b ok">${ic("check")}<div><b>Заявка отправлена</b><div class="meta">Мастера свяжутся с вами</div></div></div>`,
+    mc2("ВМ","Ваша анкета","Ремонт · ваш город","В каталоге","g","a") + `<div class="vc b ok">${ic("star")}<div><b>Бесплатно</b><div class="meta">Цены и контакты — ваши</div></div></div>`
+  ];
+  const S = [
+    ["Мастер найдётся за минуту","Выберите услугу и город, сравните цены и сразу позвоните или напишите в Telegram.","#/list","Смотреть мастеров",["santeh","electric","repair","beauty","tutor","moving"]],
+    ["Некогда искать? Оставьте заявку","Опишите задачу в паре строк, и мастера из вашего города сами с вами свяжутся.","#/request","Оставить заявку",["note","phone","check","note","phone","check"]],
+    ["Вы мастер? Покажите себя клиентам","Бесплатная анкета с ценами и контактами. Вас смогут найти по всему Приднестровью.","#/add","Добавить себя",["star","user","home","star","user","home"]]
+  ];
+  return `<section class="banner" id="bn" aria-label="Как работает сайт">
+    <div class="bars">${S.map(() => "<i></i>").join("")}</div>
+    ${S.map((s,i) => `<div class="scene"><div><h2>${s[0]}</h2><p>${s[1]}</p><a class="btn" href="${s[2]}">${s[3]}</a></div>
+      <div class="vis">${VIS[i]}</div></div>`).join("")}
+    <div class="bnav"><button class="rb prev" aria-label="Назад">‹</button><button class="rb next" aria-label="Дальше">›</button></div>
+  </section>
+  <h1>Надёжные мастера по всему Приднестровью</h1>
+  <p class="meta" style="font-size:17px;margin:0 0 16px">Сантехники, электрики, ремонт, красота, репетиторы, перевозки и уборка в одном каталоге.</p>
+  <form class="search" id="sf"><input id="q" type="search" placeholder="Что нужно сделать? Например, заменить розетку" aria-label="Поиск"><button class="btn" type="submit">Найти</button></form>
+  <h2>Как это работает</h2>
+  <div class="steps">${[["Выберите услугу","Найдите категорию или введите задачу в поиске."],["Сравните мастеров","Смотрите цены, город и описание работ."],["Свяжитесь напрямую","Позвоните или напишите в Telegram, без посредников."]].map((t,i) => `<div class="st"><span class="n">${i+1}</span><b>${t[0]}</b><div class="meta">${t[1]}</div></div>`).join("")}</div>
+  <h2>Новые мастера</h2>
+  <div class="grid">${fresh.map(card).join("")}</div>
+  <section class="about"><div><h2 style="margin-top:0">О сайте</h2><p>Мастер ПМР — бесплатный каталог частных мастеров и бригад Приднестровья. Клиенты находят исполнителя без посредников и комиссий, а мастера получают заказы из своего города.</p></div><div class="facts"><div><b>${masters.length}</b><span>мастеров в каталоге</span></div><div><b>${CITIES.length}</b><span>городов</span></div><div><b>${CATS.length}</b><span>направлений</span></div></div></section>
+  <div class="cta"><div><h2>Не хотите искать?</h2><div>Опишите задачу, и мастера откликнутся сами.</div></div><a class="btn" href="#/request">Оставить заявку</a></div>`;
+}
+function services(){
+  return `<h1 style="margin-top:28px">Услуги</h1>
+  <p class="meta" style="font-size:17px;margin:0 0 8px">Выберите направление, и мы покажем мастеров по всему Приднестровью.</p>
+  <div class="ringwrap" id="rw"><div class="ring" id="ring">${CATS.map((c,i) => `<a class="cat" style="--i:${i};--c1:${c[2]};--c2:${c[3]}" href="#/list?cat=${c[0]}"><span class="ib">${ic(c[0])}</span>${c[1]}</a>`).join("")}</div>
+    <button class="rb rp" id="rp" aria-label="Предыдущая услуга">‹</button><button class="rb rn" id="rn" aria-label="Следующая услуга">›</button></div>
+  <div class="svc">${CATS.map(c => `<a class="sv" href="#/list?cat=${c[0]}" style="--c1:${c[2]};--c2:${c[3]}"><span class="ib">${ic(c[0])}</span><div><b>${c[1]}</b><div class="meta">${c[4]}</div></div></a>`).join("")}</div>`;
+}
+function list(p){
+  const cat = p.get("cat") || "", dist = p.get("d") || "", q = (p.get("q") || "").toLowerCase().trim();
+  const words = q.split(/\s+/).filter(Boolean).map(w => w.length > 4 ? w.slice(0, -2) : w);
+  const res = masters.filter(m => (!cat || m.category === cat) && (!dist || m.city === dist) &&
+    (!q || words.every(w => [m.name, m.description, catName(m.category), m.price].join(" ").toLowerCase().includes(w))));
+  return `<h1 style="margin-top:28px;font-size:30px">Мастера Приднестровья</h1>
+  <form class="filters" id="ff">
+    <select id="fc" aria-label="Категория"><option value="">Все категории</option>${options(CATS.map(c=>[c[0],c[1]]), cat)}</select>
+    <select id="fd" aria-label="Город"><option value="">Все города</option>${options(CITIES, dist)}</select>
+    <input id="fq" type="search" placeholder="Поиск" value="${esc(q)}" aria-label="Поиск">
+    <select id="fs" aria-label="Сортировка"><option value="">По умолчанию</option><option value="r" ${p.get("s") === "r" ? "selected" : ""}>Сначала лучшие</option></select>
+  </form>
+  <div class="meta" style="margin-bottom:10px">Найдено: ${res.length}</div>
+  ${res.length ? `<div class="grid">${(p.get("s") === "r" ? [...res].sort((a, b) => rate(b.id).avg - rate(a.id).avg || rate(b.id).n - rate(a.id).n) : res).map(card).join("")}</div>`
+   : `<div class="empty">Никого не нашли. Попробуйте другой город или <a href="#/request">оставьте заявку</a>: мастера откликнутся сами.</div>`}`;
+}
+function master(id){
+  const m = masters.find(x => String(x.id) === String(id));
+  if (!m) return `<div class="empty" style="margin-top:28px">Такого мастера нет. <a href="#/list">Вернуться к списку</a></div>`;
+  return `<a class="crumb" href="#/list">← Все мастера</a>
+  <article class="mc" style="max-width:600px;gap:14px">
+    <div class="top">${avatar(m,true)}<div><h1 style="font-size:26px;margin:0">${esc(m.name)}</h1>
+    <div class="meta">${esc(catName(m.category))} · ${esc(m.city || "Приднестровье")}</div></div></div>
+    <p style="margin:0">${esc(m.description)}</p>
+    <div><span class="meta">Цена</span><div class="price">${esc(m.price)}</div></div>
+    <div><span class="meta">Телефон</span><div class="price">${esc(m.phone)}</div></div>
+    ${buttons(m, true)}
+    ${chatBtn(m)}
+  </article>
+  ${revBlock(m)}`;
+}
+function master2(id){
+  const m = masters.find(x => String(x.id) === String(id)), u = me();
+  if (!m) return `<div class="empty" style="margin-top:28px">Такого мастера нет. <a href="#/list">Вернуться к списку</a></div>`;
+  const r = rate(m.id), own = u && u.masterId === m.id, cli = u && u.role === "user", k = Math.round(r.avg);
+  const stars = r.n ? "★".repeat(k) + "☆".repeat(5 - k) : "☆☆☆☆☆";
+  const fact = (t, v) => v ? `<div><div class="meta">${t}</div><div class="price">${esc(v)}</div></div>` : "";
+  const cw = cli ? `<div class="cw" id="cw"><div class="cwi"><div class="cwh"><b>Чат: ${esc(m.name)}</b><button type="button" class="rb" id="cx" aria-label="Закрыть">×</button></div><div class="chat" id="cm" data-mid="${esc(m.id)}" data-cid="${esc(u.id)}" data-role="c">${chatMsgs(m.id, u.id, "c")}</div><form class="cf" id="cf" novalidate><input name="t" maxlength="500" placeholder="Напишите сообщение" autocomplete="off" aria-label="Сообщение"><button class="btn" type="submit" aria-label="Отправить">${ic("send")}</button></form></div></div>` : "";
+  return `<a class="crumb" href="#/list">← Все мастера</a>
+  <article class="mc" style="max-width:720px;gap:16px;cursor:default">
+    <div class="top">${avatar(m, true)}<div><h1 style="font-size:28px;margin:0">${esc(m.name)}</h1><div class="meta">${esc(catName(m.category))} · ${esc(m.city || "Приднестровье")}</div><div style="margin-top:4px"><span class="rt" aria-hidden="true">${stars}</span> ${rating(m)}</div></div></div>
+    <div><h3 style="margin:0 0 4px">О мастере</h3><p style="margin:0">${esc(m.description)}</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">${fact("Цены", m.price)}${fact("Город", m.city)}${fact("Направление", catName(m.category))}${fact("Телефон", m.phone)}${fact("Telegram", tgUser(m.telegram) ? "@" + tgUser(m.telegram) : "")}</div>
+    ${buttons(m, true)}
+    ${cli ? `<button type="button" class="btn" id="co">${ic("send")} Написать в чате</button>` : `<div class="meta">${own ? "Это ваша карточка. Клиенты видят её так же, а сообщения придут в кабинет." : "Чат и отзывы доступны клиентам. Чтобы написать мастеру, войдите как клиент."}</div>`}
+  </article>
+  ${revBlock(m)}${cw}`;
+}
+function addForm(){
+  return `<h1 style="margin-top:28px;font-size:30px">Добавить себя как мастера</h1>
+  <p class="meta">Бесплатно. ${useDB ? "Анкета появится на сайте после проверки." : "Прототип: анкета сохранится только в этом браузере."}</p>
+  <form class="f" id="af" novalidate>
+    <label>Имя или название бригады<input name="name" required maxlength="60" autocomplete="name"></label>
+    <label>Категория<select name="category" required>${options(CATS.map(c=>[c[0],c[1]]))}</select></label>
+    <label>Город<select name="city">${options(CITIES)}</select></label>
+    <label>Чем занимаетесь<textarea name="description" required maxlength="400" placeholder="Какие работы делаете, сколько лет опыт"></textarea></label>
+    <label>Цены<input name="price" required maxlength="60" placeholder="Например: от 150 руб. за выезд"></label>
+    <label>Телефон<input name="phone" type="tel" required placeholder="+373 533 ..." autocomplete="tel"></label>
+    <label>Telegram <span class="hint">необязательно, без @</span><input name="telegram" maxlength="40"></label>
+    <div><div class="meta" style="margin-bottom:8px">Так вас увидят клиенты</div><div id="pv"></div></div>
+    <div class="err" id="er" role="alert"></div>
+    <button class="btn" type="submit">Отправить анкету</button>
+  </form>`;
+}
+function myReqs(){
+  if (useDB) return "";
+  const l = ls.get("pmr_requests", []); if (!l.length) return "";
+  return `<h2>Ваши заявки (тест)</h2><div class="grid">${l.map(q => `<div class="mc"><b>${esc(catName(q.category))} · ${esc(q.city)}</b><div>${esc(q.text)}</div><div class="meta">Контакт: ${esc(q.contact)}</div></div>`).join("")}</div>`;
+}
+function reqForm(p){
+  return `<h1 style="margin-top:28px;font-size:30px">Оставить заявку</h1>
+  <p class="meta">Опишите задачу — подходящие мастера свяжутся с вами.</p>
+  <form class="f" id="rf" novalidate>
+    <label>Что нужно сделать<textarea name="text" required maxlength="500" placeholder="Например: заменить смеситель на кухне"></textarea></label>
+    <label>Категория<select name="category">${options(CATS.map(c=>[c[0],c[1]]), p.get("cat")||"")}</select></label>
+    <label>Город<select name="city">${options(CITIES)}</select></label>
+    <label>Ваше имя<input name="name" maxlength="60" autocomplete="name" value="${esc((me() || {}).name || "")}"></label>
+    <label>Телефон или Telegram<input name="contact" required maxlength="60" value="${esc((me() || {}).phone || (me() || {}).email || "")}"></label>
+    <div class="err" id="er" role="alert"></div>
+    <button class="btn" type="submit">Отправить заявку</button>
+  </form>${myReqs()}`;
+}
+const done = (t, extra="") => `<div class="msg" style="margin-top:28px">${t}</div>${extra}<p><a class="btn ghost" href="#/">На главную</a></p>`;
+
+/* ===== АККАУНТЫ (тест) ===== */
+const me = () => { const id = ls.get("pmr_session", null); return ls.get("pmr_users", []).find(u => u.id === id) || null; };
+const digits = p => String(p).replace(/\D/g, "");
+const emailOk = s => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(s).trim());
+async function hp(pw, salt){
+  if (!(window.crypto && crypto.subtle)) return btoa(unescape(encodeURIComponent(salt + ":" + pw)));
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(salt + ":" + pw));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("");
+}
+const ROLE = {user:"Клиент", master:"Мастер"};
+function startPage(role){
+  ls.set("pmr_seen", 1);
+  const R = role === "master" || role === "user" ? role : "";
+  return `<section class="banner" style="min-height:0;padding:26px 24px 28px"><div style="position:relative;z-index:1"><div style="font-weight:800;font-size:clamp(26px,5vw,40px);line-height:1.1;letter-spacing:-1px">Мастер найдётся за минуту</div><p style="margin:8px 0 0;color:rgba(255,255,255,.88);max-width:44ch">Каталог мастеров Приднестровья: звоните или пишите напрямую. Создайте аккаунт, чтобы начать.</p></div></section>
+  <h1 style="margin-top:28px;font-size:34px">Создайте аккаунт</h1>
+  <p class="meta">Тестовая регистрация: данные и пароль хранятся только в вашем браузере.</p>
+  <form class="f" id="sg" novalidate>
+    <input type="hidden" name="role" value="${R}">
+    <div class="roles">
+      <button type="button" class="role ${R === "user" ? "on" : ""}" data-role="user">${ic("users")}<b>Ищу мастера</b><span class="meta">Оставляйте заявки и следите за ними</span></button>
+      <button type="button" class="role ${R === "master" ? "on" : ""}" data-role="master">${ic("adduser")}<b>Предоставляю услуги</b><span class="meta">Анкета в каталоге и заявки для вас</span></button>
+    </div>
+    <label><span id="nl">${R === "master" ? "Имя или название бригады" : "Имя"}</span><input name="name" maxlength="60" autocomplete="name"></label>
+    <div style="display:grid;gap:8px"><span style="font-weight:600;font-size:15px">Почта или телефон</span><div class="seg" id="seg"><button type="button" data-m="email" class="on">Почта</button><button type="button" data-m="phone">Телефон</button></div><input type="hidden" name="via" value="email"><input name="contact" type="email" placeholder="name@example.com" aria-label="Почта или телефон" autocomplete="email"></div>
+    <label>Пароль <span class="hint">не меньше 6 символов</span><input name="password" type="password" autocomplete="new-password"></label>
+    <label id="mp" style="display:none">Телефон для клиентов <span class="hint">по нему вам будут звонить</span><input name="phone" type="tel" placeholder="+373 533 ..." autocomplete="tel"></label>
+    <label>Город<select name="city">${options(CITIES)}</select></label>
+    <div id="mf" style="display:${R === "master" ? "grid" : "none"};gap:14px">
+      <label>Категория<select name="category">${options(CATS.map(c => [c[0], c[1]]))}</select></label>
+      <label>Чем занимаетесь<textarea name="description" maxlength="400" placeholder="Какие работы делаете, сколько лет опыт"></textarea></label>
+      <label>Цены<input name="price" maxlength="60" placeholder="Например: от 150 руб. за выезд"></label>
+      <label>Telegram <span class="hint">необязательно, без @</span><input name="telegram" maxlength="40"></label>
+    </div>
+    <div class="err" id="er" role="alert"></div>
+    <button class="btn" type="submit">Создать аккаунт</button>
+  </form>
+  <h2 style="font-size:20px">Уже есть аккаунт?</h2>
+  <form class="f" id="lg" novalidate>
+    <label>Почта или телефон<input name="login" autocomplete="username"></label>
+    <label>Пароль<input name="password" type="password" autocomplete="current-password"></label>
+    <div class="err" id="er2" role="alert"></div>
+    <button class="btn ghost" type="submit">Войти</button>
+  </form>`;
+}
+function account(){
+  const u = me(), M = u.role === "master", all = ls.get("pmr_requests", []);
+  const m = M ? ls.get("pmr_masters", []).find(x => x.id === u.masterId) : null;
+  const rq = q => `<div class="mc"><b>${esc(catName(q.category))} · ${esc(q.city)}</b><div>${esc(q.text)}</div><div class="meta">Контакт: ${esc(q.contact)}</div>${M ? "" : `<button class="btn ghost" data-rd="${esc(q.id)}">Удалить заявку</button>`}</div>`;
+  const rl = M ? all.filter(q => m && q.category === m.category && q.city === m.city) : all.filter(q => q.uid === u.id);
+  const cl = chats().filter(c => M ? c.mid === u.masterId : c.cid === u.id), ul = ls.get("pmr_users", []);
+  const chatRow = c => { const peer = M ? (ul.find(x => x.id === c.cid) || {}).name || "Клиент" : (masters.find(x => String(x.id) === c.mid) || {}).name || "Мастер", last = c.msgs[c.msgs.length - 1]; return `<a class="mc" style="text-decoration:none" href="#/chat/${esc(c.mid)}${M ? "/" + esc(c.cid) : ""}"><b>${esc(peer)}</b><div class="meta">${esc(last ? last.t.slice(0, 80) : "")}</div></a>`; };
+  return `<div class="ah">${avatar({name:u.name}, true)}<div><h1 style="font-size:28px;margin:0">${esc(u.name)}</h1><div class="meta">${ROLE[u.role]} · ${esc(u.city || "Приднестровье")}</div><div class="meta">${esc(u.email || u.phone || "")}</div></div></div>
+  ${M && m ? `<p><a class="btn ghost" href="#/master/${esc(m.id)}">Открыть мою карточку</a> ${rating(m)}</p>` : `<p><a class="btn" href="#/request">Оставить заявку</a></p>`}
+  <h2>${M ? "Моя анкета" : "Мой профиль"}</h2>
+  <form class="f" id="pf" novalidate>
+    <label>Имя${M ? " или название бригады" : ""}<input name="name" maxlength="60" value="${esc(u.name)}"></label>
+    ${M && m ? `<label>Категория<select name="category">${options(CATS.map(c => [c[0], c[1]]), m.category)}</select></label>` : ""}
+    <label>Город<select name="city">${options(CITIES, u.city)}</select></label>
+    ${M && m ? `<label>Чем занимаетесь<textarea name="description" maxlength="400">${esc(m.description)}</textarea></label><label>Цены<input name="price" maxlength="60" value="${esc(m.price)}"></label>` : ""}
+    <label>Телефон<input name="phone" type="tel" value="${esc(u.phone || "")}"></label>
+    <label>Новый пароль <span class="hint">необязательно</span><input name="password" type="password" autocomplete="new-password"></label>
+    ${M && m ? `<label>Telegram <span class="hint">без @</span><input name="telegram" maxlength="40" value="${esc(m.telegram || "")}"></label>` : ""}
+    <div class="err" id="er" role="alert"></div><div class="good" id="ok" role="status"></div>
+    <button class="btn" type="submit">Сохранить</button>
+  </form>
+  <h2>${M ? "Сообщения" : "Мои чаты"}</h2>
+  ${cl.length ? `<div class="grid">${cl.map(chatRow).join("")}</div>` : `<div class="empty">Пока нет сообщений.</div>`}
+  <h2>${M ? "Заявки для вас" : "Мои заявки"}</h2>
+  ${rl.length ? `<div class="grid">${rl.map(rq).join("")}</div>` : `<div class="empty">${M ? "Пока нет заявок вашей категории из вашего города." : "Вы ещё не оставляли заявок."}</div>`}
+  <p style="margin-top:32px"><button class="btn ghost" id="out">Выйти</button> <button class="lnk" id="del">Удалить аккаунт</button></p>`;
+}
+
+/* ===== ОТЗЫВЫ И ЧАТ (тест) ===== */
+const revs = () => ls.get("pmr_reviews", []);
+const chats = () => ls.get("pmr_chats", []);
+const rate = id => { const r = revs().filter(x => x.mid === id); return {n:r.length, avg:r.length ? r.reduce((s, x) => s + x.stars, 0) / r.length : 0}; };
+const pl = n => n % 10 === 1 && n % 100 !== 11 ? "отзыв" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? "отзыва" : "отзывов";
+const rating = m => { const r = rate(m.id); return r.n ? `<span class="rt">★ ${r.avg.toFixed(1)}</span> <span class="meta">${r.n} ${pl(r.n)}</span>` : `<span class="meta">Пока нет отзывов</span>`; };
+const chatBtn = m => { const u = me(); return u && u.role === "user" ? `<a class="btn" href="#/chat/${esc(m.id)}">${ic("send")} Написать в чате</a>` : ""; };
+function revBlock(m){
+  const u = me(), r = revs().filter(x => x.mid === m.id).sort((a, b) => b.ts - a.ts), s = rate(m.id);
+  const mine = u && r.find(x => x.uid === u.id);
+  const form = u && u.role === "user" ? `<form class="f" id="rv" data-mid="${esc(m.id)}" novalidate style="margin-top:12px"><div class="stars" id="stars" aria-label="Оценка">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-n="${n}" aria-label="${n}" class="${mine && n <= mine.stars ? "on" : ""}">★</button>`).join("")}</div><input type="hidden" name="rate" value="${mine ? mine.stars : 0}"><label>Ваш отзыв<textarea name="text" maxlength="400" placeholder="Что понравилось, как прошла работа">${esc(mine ? mine.text : "")}</textarea></label><div class="err" id="er" role="alert"></div><button class="btn" type="submit">${mine ? "Обновить отзыв" : "Оставить отзыв"}</button></form>` : "";
+  return `<div style="max-width:600px"><h2>Отзывы${s.n ? ` · ★ ${s.avg.toFixed(1)}` : ""}</h2>${r.length ? r.map(x => `<div class="mc" style="margin-bottom:10px"><div class="top"><b>${esc(x.name)}</b><span class="rt">${"★".repeat(x.stars)}</span></div><div>${esc(x.text)}</div></div>`).join("") : `<div class="empty">Пока нет отзывов.</div>`}${form}</div>`;
+}
+const chatMsgs = (mid, cid, side) => { const c = chats().find(x => x.mid === mid && x.cid === cid); return c && c.msgs.length ? c.msgs.map(x => `<div class="bb ${x.f === side ? "me" : ""}">${esc(x.t)}</div>`).join("") : `<div class="meta" style="text-align:center;margin:auto">Напишите первое сообщение</div>`; };
+function chatPage(mid, cuid){
+  const u = me(), m = masters.find(x => String(x.id) === String(mid)), isM = u.role === "master";
+  if (!m || (isM && u.masterId !== mid)) return `<div class="empty" style="margin-top:28px">Чат не найден. <a href="#/account">В кабинет</a></div>`;
+  const cid = isM ? cuid : u.id;
+  const peer = isM ? (ls.get("pmr_users", []).find(x => x.id === cid) || {name:"Клиент"}).name : m.name;
+  return `<a class="crumb" href="${isM ? "#/account" : "#/master/" + esc(m.id)}">← Назад</a><h1 style="font-size:26px;margin:0 0 12px">Чат: ${esc(peer)}</h1>
+  <div class="chat" id="cm" data-mid="${esc(mid)}" data-cid="${esc(cid)}" data-role="${isM ? "m" : "c"}">${chatMsgs(mid, cid, isM ? "m" : "c")}</div>
+  <form class="cf" id="cf" novalidate><input name="t" maxlength="500" placeholder="Сообщение" autocomplete="off" aria-label="Сообщение"><button class="btn" type="submit" aria-label="Отправить">${ic("send")}</button></form>`;
+}
+
+/* ===== РОУТЕР ===== */
+let curPath = location.hash.slice(1) || "/";
+function go(h){ if (h === curPath && !document.querySelector("#app .msg")) return; curPath = h; try { history.pushState(null, "", "#" + h); } catch(e){} route(); }
+let firstRoute = true, curIdx = 0;
+const ORDER = {home:0, services:1, list:2, master:2.5, chat:2.5, request:3, add:4, account:4, start:-1};
+const NAV = [["home","#/","Главная","home"],["services","#/services","Услуги","grid"],["list","#/list","Мастера","users"],["request","#/request","Заявка","note"],["account","#/account","Кабинет","user"]];
+async function route(){
+  const app = $("#app");
+  if (!me() && !/^\/start/.test(curPath)) { curPath = "/start" + (/^\/add/.test(curPath) ? "?role=master" : ""); try { history.replaceState(null, "", "#" + curPath); } catch(x){} }
+  if (me() && /^\/start/.test(curPath)) curPath = "/account";
+  const h = curPath;
+  const [path, qs] = h.split("?"); const p = new URLSearchParams(qs || "");
+  const seg = path.split("/").filter(Boolean);
+  const key = ORDER[seg[0] || "home"] === undefined ? "home" : (seg[0] || "home");
+  const idx = ORDER[key], dir = Math.sign(idx - curIdx) || 1;
+  if (!masters.length) await loadMasters();
+  const old = document.getElementById("ghost"); if (old) old.remove();
+  if (!firstRoute) {
+    const r = app.getBoundingClientRect(), g = document.createElement("div");
+    g.id = "ghost"; g.setAttribute("aria-hidden", "true");
+    g.style.cssText = `left:${r.left}px;width:${r.width}px;height:100vh`;
+    g.innerHTML = `<div style="transform:translateY(${r.top}px)">${app.innerHTML}</div>`;
+    g.querySelectorAll("[id]").forEach(e => e.removeAttribute("id"));
+    g.querySelectorAll("a,button,input,select,textarea").forEach(e => e.tabIndex = -1);
+    document.documentElement.style.setProperty("--d", dir);
+    document.body.appendChild(g);
+    g.addEventListener("animationend", () => g.remove());
+    setTimeout(() => g.remove(), 1200);
+  }
+  firstRoute = false; curIdx = idx;
+  clearInterval(window._ring); clearTimeout(window._bt); clearInterval(window._chat);
+  if (key === "home") app.innerHTML = home();
+  else if (key === "services") app.innerHTML = services();
+  else if (key === "list") app.innerHTML = list(p);
+  else if (key === "master") app.innerHTML = master2(decodeURIComponent(seg[1] || ""));
+  else if (key === "request") app.innerHTML = reqForm(p);
+  else if (key === "chat") app.innerHTML = chatPage(decodeURIComponent(seg[1] || ""), decodeURIComponent(seg[2] || ""));
+  else if (key === "start") app.innerHTML = startPage(p.get("role") || "");
+  else if (key === "account") app.innerHTML = me() ? account() : startPage("");
+  else app.innerHTML = me() ? account() : startPage("master");
+  const act = key === "master" ? "list" : key === "chat" ? (me().role === "master" ? "account" : "list") : (key === "start" || key === "add") ? "account" : key;
+  document.querySelectorAll("[data-p]").forEach(a => a.classList.toggle("on", a.dataset.p === act));
+  window.scrollTo(0, 0); document.body.classList.toggle("gate", !me());
+  app.classList.remove("in"); void app.offsetWidth; app.classList.add("in");
+  bind();
+}
+$("#tabs").innerHTML = NAV.map(n => `<a data-p="${n[0]}" href="${n[1]}">${ic(n[3])}<span>${n[2]}</span></a>`).join("");
+function bind(){
+  initHome();
+  const sf = $("#sf");
+  if (sf) sf.onsubmit = sf.querySelector("button[type=submit]").onclick = e => { e.preventDefault(); go("/list?q=" + encodeURIComponent($("#q").value)); };
+  const ff = $("#ff");
+  if (ff) { const go = () => { const u = new URLSearchParams();
+      if ($("#fc").value) u.set("cat", $("#fc").value); if ($("#fd").value) u.set("d", $("#fd").value);
+      if ($("#fq").value.trim()) u.set("q", $("#fq").value.trim()); if ($("#fs").value) u.set("s", $("#fs").value); curPath = "/list?" + u; try { history.replaceState(null, "", "#" + curPath); } catch(x){} renderList(u); };
+    ff.onsubmit = e => { e.preventDefault(); go(); };
+    $("#fc").onchange = go; $("#fd").onchange = go; $("#fs").onchange = go;
+    $("#fq").oninput = () => { clearTimeout(window._t); window._t = setTimeout(go, 250); };
+  }
+  const af = $("#af");
+  const pv = $("#pv");
+  if (af && pv) { const upd = () => { const d = Object.fromEntries(new FormData(af)); pv.innerHTML = card({id:"x", name:d.name.trim() || "Ваше имя", category:d.category, city:d.city, description:d.description.trim() || "Здесь появится описание ваших работ.", price:d.price.trim() || "Ваши цены", phone:d.phone || "+373", telegram:d.telegram}); }; af.addEventListener("input", upd); af.addEventListener("change", upd); upd(); }
+  if (af) af.onsubmit = af.querySelector("button[type=submit]").onclick = async e => {
+    e.preventDefault(); const d = Object.fromEntries(new FormData(af)); const er = $("#er");
+    if (!d.name.trim() || !d.description.trim() || !d.price.trim()) return er.textContent = "Заполните имя, описание и цены.";
+    if (!phoneOk(d.phone)) return er.textContent = "Проверьте номер телефона.";
+    try { const newId = await saveMaster({...d, name:d.name.trim(), telegram:tgUser(d.telegram)});
+      masters = []; $("#app").innerHTML = done(useDB ? "Спасибо! Анкета отправлена на проверку." : "Готово! Анкета добавлена в каталог (в этом браузере).", newId ? `<p><a class="btn" href="#/master/${newId}">Открыть мою карточку</a></p>` : ""); }
+    catch(x){ er.textContent = "Не получилось отправить. Попробуйте ещё раз."; }
+  };
+  const sg = $("#sg");
+  if (sg) {
+    const setRole = r => { sg.role.value = r; sg.querySelectorAll(".role").forEach(b => b.classList.toggle("on", b.dataset.role === r)); $("#mf").style.display = r === "master" ? "grid" : "none"; $("#nl").textContent = r === "master" ? "Имя или название бригады" : "Имя"; sync(); };
+    const sync = () => {
+      const m = sg.via.value, c = sg.contact;
+      sg.querySelectorAll("#seg button").forEach(b => b.classList.toggle("on", b.dataset.m === m));
+      c.type = m === "email" ? "email" : "tel"; c.placeholder = m === "email" ? "name@example.com" : "+373 533 ..."; c.autocomplete = m === "email" ? "email" : "tel";
+      $("#mp").style.display = sg.role.value === "master" && m === "email" ? "grid" : "none";
+    };
+    sg.querySelectorAll("#seg button").forEach(b => b.onclick = () => { sg.via.value = b.dataset.m; sync(); });
+    sg.querySelectorAll(".role").forEach(b => b.onclick = () => setRole(b.dataset.role));
+    sg.onsubmit = sg.querySelector("button[type=submit]").onclick = async e => {
+      e.preventDefault(); const d = Object.fromEntries(new FormData(sg)), er = $("#er"), M = d.role === "master";
+      if (d.via === "phone") { d.phone = d.contact; d.email = ""; } else d.email = d.contact;
+      if (!d.role) return er.textContent = "Выберите, кто вы.";
+      if (!d.name.trim()) return er.textContent = "Введите имя.";
+      if (!d.email.trim() && !d.phone.trim()) return er.textContent = "Укажите почту или телефон.";
+      if (d.email.trim() && !emailOk(d.email)) return er.textContent = "Проверьте почту.";
+      if (d.password.length < 6) return er.textContent = "Пароль: не меньше 6 символов.";
+      if (d.phone.trim() ? !phoneOk(d.phone) : M) return er.textContent = "Проверьте номер телефона.";
+      if (M && (!d.description.trim() || !d.price.trim())) return er.textContent = "Заполните описание и цены.";
+      const users = ls.get("pmr_users", []);
+      const email = d.email.trim().toLowerCase();
+      if (email && users.some(x => x.email === email)) return er.textContent = "Эта почта уже зарегистрирована. Войдите ниже.";
+      if (d.phone.trim() && users.some(x => digits(x.phone || "") === digits(d.phone))) return er.textContent = "Этот телефон уже зарегистрирован. Войдите ниже.";
+      const salt = Math.random().toString(36).slice(2);
+      const u = {id:"a" + Date.now(), role:d.role, name:d.name.trim(), email, salt, hash:await hp(d.password, salt), phone:d.phone.trim(), city:d.city};
+      if (M) { const mid = "u" + Date.now(); u.masterId = mid; const l = ls.get("pmr_masters", []);
+        l.unshift({id:mid, uid:u.id, name:u.name, category:d.category, city:d.city, description:d.description.trim(), price:d.price.trim(), phone:u.phone, telegram:tgUser(d.telegram)}); ls.set("pmr_masters", l); }
+      users.push(u); ls.set("pmr_users", users); ls.set("pmr_session", u.id); masters = []; go("/account");
+    };
+    setRole(sg.role.value);
+  }
+  const lg = $("#lg");
+  if (lg) lg.onsubmit = lg.querySelector("button[type=submit]").onclick = async e => {
+    e.preventDefault(); const em = lg.login.value.trim().toLowerCase(), dg = digits(em);
+    const u = em && ls.get("pmr_users", []).find(x => x.email === em || (!em.includes("@") && dg && digits(x.phone || "") === dg));
+    if (!u || u.hash !== await hp(lg.password.value, u.salt)) return $("#er2").textContent = "Неверная почта, телефон или пароль.";
+    ls.set("pmr_session", u.id); masters = []; go("/account");
+  };
+  const pf = $("#pf");
+  if (pf) pf.onsubmit = pf.querySelector("button[type=submit]").onclick = async e => {
+    e.preventDefault(); const u = me(), d = Object.fromEntries(new FormData(pf)), er = $("#er"), ok = $("#ok"); ok.textContent = "";
+    if (!d.name.trim()) return er.textContent = "Введите имя.";
+    if (d.phone.trim() ? !phoneOk(d.phone) : u.role === "master") return er.textContent = "Проверьте номер телефона.";
+    if (d.password && d.password.length < 6) return er.textContent = "Пароль: не меньше 6 символов.";
+    if (d.price !== undefined && (!d.description.trim() || !d.price.trim())) return er.textContent = "Заполните описание и цены.";
+    er.textContent = "";
+    const users = ls.get("pmr_users", []), i = users.findIndex(x => x.id === u.id);
+    const np = d.password ? {salt:Math.random().toString(36).slice(2)} : {}; if (d.password) np.hash = await hp(d.password, np.salt);
+    users[i] = {...u, ...np, name:d.name.trim(), phone:d.phone.trim(), city:d.city}; ls.set("pmr_users", users);
+    if (u.role === "master") { const l = ls.get("pmr_masters", []), k = l.findIndex(x => x.id === u.masterId);
+      if (k >= 0) { l[k] = {...l[k], name:d.name.trim(), category:d.category, city:d.city, description:d.description.trim(), price:d.price.trim(), phone:d.phone.trim(), telegram:tgUser(d.telegram)}; ls.set("pmr_masters", l); } }
+    masters = []; ok.textContent = "Сохранено."; pf.password.value = "";
+  };
+  const out = $("#out");
+  if (out) out.onclick = () => { ls.set("pmr_session", null); go("/"); };
+  const del = $("#del");
+  if (del) del.onclick = () => {
+    if (!del.dataset.s) { del.dataset.s = 1; del.textContent = "Нажмите ещё раз, чтобы удалить аккаунт навсегда"; return; }
+    const id = me().id;
+    ls.set("pmr_users", ls.get("pmr_users", []).filter(x => x.id !== id));
+    ls.set("pmr_masters", ls.get("pmr_masters", []).filter(x => x.uid !== id));
+    ls.set("pmr_requests", ls.get("pmr_requests", []).filter(x => x.uid !== id));
+    ls.set("pmr_reviews", revs().filter(x => x.uid !== id && x.mid !== me().masterId)); ls.set("pmr_chats", chats().filter(c => c.cid !== id && c.mid !== me().masterId));
+    ls.set("pmr_session", null); masters = []; go("/");
+  };
+  document.querySelectorAll("[data-rd]").forEach(b => b.onclick = () => { ls.set("pmr_requests", ls.get("pmr_requests", []).filter(q => q.id !== b.dataset.rd)); route(); });
+  const rv = $("#rv");
+  if (rv) {
+    rv.querySelectorAll("#stars button").forEach(b => b.onclick = () => { rv.rate.value = b.dataset.n; rv.querySelectorAll("#stars button").forEach(x => x.classList.toggle("on", +x.dataset.n <= +b.dataset.n)); });
+    rv.onsubmit = rv.querySelector("button[type=submit]").onclick = e => {
+      e.preventDefault(); const st = +rv.rate.value, u = me();
+      if (!st) return $("#er").textContent = "Поставьте оценку.";
+      const l = revs().filter(x => !(x.mid === rv.dataset.mid && x.uid === u.id));
+      l.unshift({id:"v" + Date.now(), mid:rv.dataset.mid, uid:u.id, name:u.name, stars:st, text:rv.text.value.trim(), ts:Date.now()});
+      ls.set("pmr_reviews", l); route();
+    };
+  }
+  const cf = $("#cf");
+  if (cf) {
+    const cm = $("#cm"), draw = () => { const f = cm.scrollTop + cm.clientHeight >= cm.scrollHeight - 30; cm.innerHTML = chatMsgs(cm.dataset.mid, cm.dataset.cid, cm.dataset.role); if (f) cm.scrollTop = cm.scrollHeight; };
+    cm.scrollTop = cm.scrollHeight; window._chat = setInterval(draw, 2000);
+    cf.onsubmit = cf.querySelector("button[type=submit]").onclick = e => {
+      e.preventDefault(); const t = cf.t.value.trim(); if (!t) return;
+      const l = chats(), mid = cm.dataset.mid, cid = cm.dataset.cid; let c = l.find(x => x.mid === mid && x.cid === cid);
+      if (!c) { c = {mid, cid, msgs:[]}; l.push(c); }
+      c.msgs.push({f:cm.dataset.role, t, ts:Date.now()});
+      const m = masters.find(x => String(x.id) === mid);
+      if (m && !m.uid && c.msgs.length === 1) c.msgs.push({f:"m", t:"Здравствуйте! Это тестовый мастер из демо-каталога, живого ответа не будет.", ts:Date.now()});
+      ls.set("pmr_chats", l); cf.t.value = ""; cm.innerHTML = chatMsgs(mid, cid, cm.dataset.role); cm.scrollTop = cm.scrollHeight;
+    };
+  }
+  const cw = $("#cw");
+  if (cw) {
+    $("#co").onclick = () => { cw.classList.add("open"); const cm = $("#cm"); cm.scrollTop = cm.scrollHeight; $("#cf").t.focus(); };
+    $("#cx").onclick = () => cw.classList.remove("open");
+    cw.onclick = e => { if (e.target === cw) cw.classList.remove("open"); };
+  }
+  const rf = $("#rf");
+  if (rf) rf.onsubmit = rf.querySelector("button[type=submit]").onclick = async e => {
+    e.preventDefault(); const d = Object.fromEntries(new FormData(rf)); const er = $("#er");
+    if (!d.text.trim() || !d.contact.trim()) return er.textContent = "Опишите задачу и оставьте контакт.";
+    try { await saveRequest({...d, id:"r" + Date.now(), uid:(me() || {}).id, text:d.text.trim(), contact:d.contact.trim()});
+      const admin = tgUser(CONFIG.ADMIN_TG);
+      const extra = admin ? `<p><a class="btn tg" target="_blank" rel="noopener" href="https://t.me/${admin}?text=${encodeURIComponent("Заявка: " + d.text + " (" + catName(d.category) + ", " + d.city + "). Контакт: " + d.contact)}">Отправить также в Telegram</a></p>` : "";
+      const mm = masters.filter(m => m.category === d.category).slice(0, 3);
+      $("#app").innerHTML = done("Заявка отправлена. Мастера свяжутся с вами.", extra + (mm.length ? `<h2>Мастера, которым ушла заявка</h2><div class="grid">${mm.map(card).join("")}</div>` : "")); }
+    catch(x){ er.textContent = "Не получилось отправить. Попробуйте ещё раз."; }
+  };
+}
+function renderList(p){ // обновляет только список, чтобы не терять фокус в поиске
+  const tmp = document.createElement("div"); tmp.innerHTML = list(p);
+  $("#app").querySelector(".meta").outerHTML = tmp.querySelector(".meta").outerHTML;
+  const old = $("#app").querySelector(".grid, .empty"); const nw = tmp.querySelector(".grid, .empty");
+  if (old && nw) old.replaceWith(nw);
+}
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function swipe(el, fn){
+  let x0 = null, y0 = 0;
+  el.addEventListener("pointerdown", e => { x0 = e.clientX; y0 = e.clientY; });
+  el.addEventListener("pointerup", e => { if (x0 === null) return; const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) fn(dx < 0 ? 1 : -1); });
+  el.addEventListener("pointercancel", () => { x0 = null; });
+}
+function initHome(){
+  const bn = $("#bn");
+  if (bn) {
+    const sc = [...bn.querySelectorAll(".scene")], bars = [...bn.querySelectorAll(".bars i")]; let cur = -1;
+    const show = i => {
+      clearTimeout(window._bt); const prev = cur; cur = (i + sc.length) % sc.length;
+      sc.forEach((s,k) => { s.classList.toggle("on", k === cur); s.classList.toggle("out", k === prev && k !== cur); });
+      bars.forEach((b,k) => { b.classList.remove("on"); b.classList.toggle("done", k < cur); });
+      void bn.offsetWidth; bars[cur].classList.add("on");
+      if (!reduce) window._bt = setTimeout(() => show(cur + 1), 7000);
+    };
+    bars.forEach((b,k) => b.onclick = () => show(k));
+    bn.querySelector(".prev").onclick = () => show(cur - 1);
+    bn.querySelector(".next").onclick = () => show(cur + 1);
+    show(0);
+    swipe(bn, d => show(cur + d));
+  }
+  const ring = $("#ring");
+  if (ring) {
+    let a = 0; const step = 360 / CATS.length;
+    const turn = d => { a += d * step; ring.style.transform = `translateZ(-200px) rotateY(${-a}deg)`; };
+    $("#rp").onclick = () => turn(-1); $("#rn").onclick = () => turn(1);
+    turn(0);
+    swipe($("#rw"), d => turn(d));
+    if (!reduce) { window._ring = setInterval(() => turn(1), 4000); $("#rw").onpointerenter = () => clearInterval(window._ring); }
+  }
+}
+addEventListener("pointermove", e => {
+  if (reduce || e.pointerType !== "mouse") return;
+  const c = e.target.closest && e.target.closest(".mc");
+  document.querySelectorAll(".mc.tilt").forEach(x => { if (x !== c) { x.classList.remove("tilt"); x.style.removeProperty("--rx"); x.style.removeProperty("--ry"); } });
+  if (!c) return;
+  const r = c.getBoundingClientRect(); c.classList.add("tilt");
+  c.style.setProperty("--ry", ((e.clientX - r.left) / r.width - .5) * 14 + "deg");
+  c.style.setProperty("--rx", -((e.clientY - r.top) / r.height - .5) * 14 + "deg");
+});
+document.addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest('a[href^="#/"]');
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault(); go(a.getAttribute("href").slice(1));
+});
+document.addEventListener("click", e => { const c = e.target.closest && e.target.closest(".mc[data-href]"); if (c && !e.target.closest("a,button")) go(c.dataset.href); });
+addEventListener("popstate", () => { curPath = location.hash.slice(1) || "/"; route(); });
+$("#reset").onclick = () => { ls.set("pmr_masters", []); ls.set("pmr_requests", []); ls.set("pmr_reviews", []); ls.set("pmr_chats", []); ls.set("pmr_users", []); ls.set("pmr_session", null); masters = []; curPath = "/"; try { history.replaceState(null, "", "#/"); } catch(x){} route(); };
+route();
+</script>
+</body>
+</html>
